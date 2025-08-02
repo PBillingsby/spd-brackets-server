@@ -39,7 +39,7 @@ const validateEnvVars = (req: Request, res: Response, next: any) => {
 
 router.use(validateEnvVars);
 
-// --------- Route 1: Create Transaction (Converted from your working web app) ---------
+// --------- Route 1: Create Transaction ---------
 router.post('/create-transaction', async (req: Request, res: Response) => {
   try {
     const { senderPublicKey, presaleAmount = 5 } = req.body; // Default to 5 USDC if not provided
@@ -162,7 +162,7 @@ router.post('/create-transaction', async (req: Request, res: Response) => {
   }
 });
 
-// --------- Route 2: Verify + Submit Transaction (Converted from your working web app) ---------
+// --------- Route 2: Verify + Submit Transaction ---------
 router.post('/verify-and-submit-transaction', async (req: Request, res: Response) => {
   try {
     const {
@@ -231,7 +231,7 @@ router.post('/verify-and-submit-transaction', async (req: Request, res: Response
         } catch (error) {
           attempts++;
           if (attempts === maxRetries) throw error;
-          // Exponential backoff: 2s, 4s, 8s, 16s, 32s
+          // Exponential backoff
           await new Promise((resolve) => setTimeout(resolve, Math.pow(2, attempts) * 1000));
         }
       }
