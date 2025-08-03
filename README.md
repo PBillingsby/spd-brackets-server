@@ -13,9 +13,9 @@ cd spd-brackets-server
 2. Install Dependencies
 `npm install`
 3. Create an .env File
-Copy the example and fill in your values:
 
-`cp .env.example .env`
+Copy the example and fill in your values: `cp .env.example .env`
+
 4. Start the Server
 `npm run dev`
 
