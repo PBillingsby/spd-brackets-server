@@ -10,13 +10,13 @@ This is the backend service for the SPD Brackets prediction platform — used to
 git clone git@github.com:PBillingsby/spd-brackets-server.git
 cd spd-brackets-server
 ```
-2. Install Dependencies
+### 2. Install Dependencies
 `npm install`
-3. Create an .env File
+### 3. Create an .env File
 
 Copy the example and fill in your values: `cp .env.example .env`
 
-4. Start the Server
+### 4. Start the Server
 `npm run dev`
 
 This starts the server in development mode with auto-reloading via nodemon.
