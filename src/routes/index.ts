@@ -20,17 +20,17 @@ dotenv.config();
 const router = express.Router();
 
 const HASH_PRIVATE_KEY = process.env.HASH_PRIVATE_KEY;
-const PRESALE_MINT_ADDRESS = process.env.PRESALE_MINT_ADDRESS;
-const PRESALE_RECIPIENT_KEY = process.env.PRESALE_RECIPIENT_KEY;
+const PAYMENT_MINT_ADDRESS = process.env.PAYMENT_MINT_ADDRESS;
+const PAYMENT_RECIPIENT_KEY = process.env.PAYMENT_RECIPIENT_KEY;
 const SOLANA_RPC_URL = process.env.SOLANA_RPC_URL || clusterApiUrl('devnet');
 
 // Validation middleware
 const validateEnvVars = (req: Request, res: Response, next: any) => {
-  if (!HASH_PRIVATE_KEY || !PRESALE_MINT_ADDRESS || !PRESALE_RECIPIENT_KEY) {
+  if (!HASH_PRIVATE_KEY || !PAYMENT_MINT_ADDRESS || !PAYMENT_RECIPIENT_KEY) {
     console.error('Missing environment variables:', {
       HASH_PRIVATE_KEY: !!HASH_PRIVATE_KEY,
-      PRESALE_MINT_ADDRESS: !!PRESALE_MINT_ADDRESS,
-      PRESALE_RECIPIENT_KEY: !!PRESALE_RECIPIENT_KEY
+      PAYMENT_MINT_ADDRESS: !!PAYMENT_MINT_ADDRESS,
+      PAYMENT_RECIPIENT_KEY: !!PAYMENT_RECIPIENT_KEY
     });
     return res.status(500).json({ error: 'Server configuration error: Missing environment variables' });
   }
@@ -50,8 +50,8 @@ router.post('/create-transaction', async (req: Request, res: Response) => {
 
     const connection = new Connection(SOLANA_RPC_URL, 'confirmed');
 
-    const usdcMint = new PublicKey(PRESALE_MINT_ADDRESS!);
-    const recipient = new PublicKey(PRESALE_RECIPIENT_KEY!);
+    const usdcMint = new PublicKey(PAYMENT_MINT_ADDRESS!);
+    const recipient = new PublicKey(PAYMENT_RECIPIENT_KEY!);
     const senderPubkey = new PublicKey(senderPublicKey);
 
     // Get server keypair
